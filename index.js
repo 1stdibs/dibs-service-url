@@ -3,7 +3,6 @@ var assign = require('lodash.assign');
 var isArray = require('lodash.isarray');
 var isEmpty = require('lodash.isempty');
 var qs = require('qs');
-var assert = require('assert');
 module.exports = function (options) {
     var endpoint = [];
     options = assign({
@@ -15,9 +14,15 @@ module.exports = function (options) {
         end: undefined,
         params: {}
     }, options);
-    assert(options.versions);
-    assert(options.versions.latestServices); // latest version tag per service
-    assert(options.versions.latest); // latest base endpoint per service
+    if (!options.versions) {
+        throw new Error('dibs-service-url requires options.versions');
+    }
+    if (!options.versions.latestServices) { // latest version tag per service
+        throw new Error('dibs-service-url requires options.versions.latestServices');
+    }
+    if (!options.versions.latest) { // latest base endpoint per service
+        throw new Error('dibs-service-url requires options.versions.latest');
+    }
 
     if (isArray(options.end)) {
         options.end = options.end.join('/');
