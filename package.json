@@ -1,6 +1,6 @@
 {
   "name": "dibs-service-url",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "builds service url based on passed options",
   "author": "",
   "scripts": {
